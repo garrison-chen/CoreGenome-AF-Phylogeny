@@ -1,0 +1,96 @@
+The flag 'directory' used in rule run_sans is only valid for outputs, not inputs.
+The flag 'directory' used in rule run_protspam is only valid for outputs, not inputs.
+The flag 'directory' used in rule run_multispam is only valid for outputs, not inputs.
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 4
+Rules claiming more threads will be scaled down.
+Job stats:
+job                  count    min threads    max threads
+-----------------  -------  -------------  -------------
+all                      1              1              1
+clustering               1              1              1
+merge_input              1              1              1
+run_sans                 1              1              1
+select_proteins          1              1              1
+separate_proteins        1              1              1
+total                    6              1              1
+
+Select jobs to execute...
+
+[Sun Mar 19 12:41:49 2023]
+rule merge_input:
+    input: data/test
+    output: input.fasta
+    jobid: 5
+    reason: Missing output files: input.fasta
+    resources: tmpdir=/tmp
+
+[Sun Mar 19 12:41:49 2023]
+Finished job 5.
+1 of 6 steps (17%) done
+Select jobs to execute...
+
+[Sun Mar 19 12:41:49 2023]
+rule clustering:
+    input: input.fasta
+    output: clusterRes_cluster.tsv
+    jobid: 4
+    reason: Missing output files: clusterRes_cluster.tsv; Input files updated by another job: input.fasta
+    resources: tmpdir=/tmp
+
+[Sun Mar 19 12:42:01 2023]
+Finished job 4.
+2 of 6 steps (33%) done
+Select jobs to execute...
+
+[Sun Mar 19 12:42:01 2023]
+rule select_proteins:
+    input: clusterRes_cluster.tsv, data/test
+    output: Selected_Prot.fasta
+    jobid: 3
+    reason: Missing output files: Selected_Prot.fasta; Input files updated by another job: clusterRes_cluster.tsv
+    resources: tmpdir=/tmp
+
+[Sun Mar 19 12:48:35 2023]
+Finished job 3.
+3 of 6 steps (50%) done
+Select jobs to execute...
+
+[Sun Mar 19 12:48:35 2023]
+rule separate_proteins:
+    input: Selected_Prot.fasta
+    output: toSeparate
+    jobid: 2
+    reason: Missing output files: toSeparate; Input files updated by another job: Selected_Prot.fasta
+    resources: tmpdir=/tmp
+
+[Sun Mar 19 12:48:43 2023]
+Finished job 2.
+4 of 6 steps (67%) done
+Select jobs to execute...
+
+[Sun Mar 19 12:48:43 2023]
+rule run_sans:
+    input: toSeparate
+    output: sans_greedytree.new
+    jobid: 1
+    reason: Missing output files: sans_greedytree.new; Input files updated by another job: toSeparate
+    resources: tmpdir=/tmp
+
+[Sun Mar 19 12:48:45 2023]
+Finished job 1.
+5 of 6 steps (83%) done
+Select jobs to execute...
+
+[Sun Mar 19 12:48:45 2023]
+localrule all:
+    input: sans_greedytree.new
+    jobid: 0
+    reason: Input files updated by another job: sans_greedytree.new
+    resources: tmpdir=/tmp
+
+[Sun Mar 19 12:48:45 2023]
+Finished job 0.
+6 of 6 steps (100%) done
+Complete log: .snakemake/log/2023-03-19T124149.373450.snakemake.log
