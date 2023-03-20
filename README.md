@@ -2,6 +2,8 @@
 
 `CoreGenome-AF-Phylogeny` is a Snakemake pipeline which uses Alignment-free methods to construct Phylogenetic trees. Given a list of proteomes in fasta format from various species, it performs clustering with all the proteins and selects those from core genomes. Then the pipeline feeds them into the Alignment-free based methods to generate the Phylogenetic tree.
 
+![image](https://user-images.githubusercontent.com/44410011/226342786-bca68ff6-775b-41fd-9bae-9ee5d18a3604.png)
+
 ## Installation
 ```
 git clone https://github.com/garrison-chen/CoreGenome-AF-Phylogeny.git && cd CoreGenome-AF-Phylogeny
@@ -40,7 +42,7 @@ sudo cp SANS /bin
 
 
 ## Usage
-To start with, you need to copy your input data under `data` folder. The data should be fasta format, where each fasta file represents amino acid sequences from a single species. Ideally, the fasta file should cover the proteome. 
+To start with, you need to edit the path ("path"->"data") in the `config.yaml` file to point to your input data. The data should be fasta format, where each fasta file represents amino acid sequences from a single species. Ideally, the fasta file should cover the proteome. 
 
 Then, edit the `config.yaml` file to set up the parameters you prefer for clustering sequence identity and the number threads you want to use.
 
